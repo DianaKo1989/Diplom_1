@@ -36,7 +36,7 @@ class Burger:
 
         return price
 
-    def get_receipt(self) -> str:
+    def get_recipe(self) -> str:
         receipt: List[str] = [f'(==== {self.bun.get_name()} ====)']
 
         for ingredient in self.ingredients:
