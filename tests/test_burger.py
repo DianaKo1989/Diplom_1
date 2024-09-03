@@ -1,5 +1,7 @@
 from typing import List
 
+import pytest
+
 from praktikum.bun import Bun
 from praktikum.burger import Burger
 from praktikum.database import Database
@@ -7,6 +9,28 @@ from praktikum.ingredient import Ingredient
 
 
 class TestBurger:
+
+    @pytest.mark.parametrize('name, price', [
+        ('Ржаная', 200),
+        ('Кунжут', 1000),
+        ('Бао', 20.5)
+    ])
+    def test_burger_set_buns_method(self, name, price):
+        bun = Bun(name=name, price=price)
+        burger: Burger = Burger()
+        burger.set_buns(bun)
+        assert burger.bun == bun
+
+    @pytest.mark.parametrize('name, type, price', [
+        ('Кетчуп', 'cоус', 200),
+        ('Майонез', 'начинка', 1000),
+        ('Гуляш', 'гарнир', 20.5)
+    ])
+    def test_burger_add_ingredient_method(self, name, type, price):
+        ingredient = Ingredient(name=name, price=price, ingredient_type=type)
+        burger: Burger = Burger()
+        burger.add_ingredient(ingredient)
+        assert burger.ingredients[0] == ingredient
 
     def test_get_recipe(self):
         database: Database = Database()
